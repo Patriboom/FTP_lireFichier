@@ -1,0 +1,25 @@
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+FTP_lireFichier	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+begin		KEYWORD2
+end			KEYWORD2
+update		KEYWORD2
+forceUpdate	KEYWORD2
+getTime	     KEYWORD2
+getText   	KEYWORD2
+getSize		KEYWORD2
+getStatus		KEYWORD2
+setFrequ  	KEYWORD2
+setServerName	KEYWORD2
+setDirectory	KEYWORD2
+setFileName	KEYWORD2
+setFrequency	KEYWORD2
+setPort		KEYWORD2
+
