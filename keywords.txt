@@ -2,7 +2,7 @@
 # Datatypes (KEYWORD1)
 #######################################
 
-FTP_lireFichier	KEYWORD1
+LecteurFTP	KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)
