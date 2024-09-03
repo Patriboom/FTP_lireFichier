@@ -37,8 +37,8 @@ class LecteurFTP {
 	   bool	status = true;
 	
 	public:
-		LecteurFTP(char* _ftpSrv, char* _ftpUsr, char* _ftpPsw, char* _ftpFile) : FTPclient() {}
-//		LecteurFTP(char* _ftpSrv, char* _ftpUsr, char* _ftpPsw, char* _ftpFile) : _ftpSrv(_ftpSrv), _ftpUsr(_ftpUsr), _ftpPsw(_ftpPsw), _ftpFile("MonFichier.txt"), _ftpRep("/"), FTPclient() {}
+//		LecteurFTP(char* _ftpSrv, char* _ftpUsr, char* _ftpPsw, char* _ftpFile) : FTPclient() {}
+		LecteurFTP(char* _ftpSrv, char* _ftpUsr, char* _ftpPsw, char* _ftpFile) : _ftpSrv(_ftpSrv), _ftpUsr(_ftpUsr), _ftpPsw(_ftpPsw), _ftpFile(strcpy(_ftpFile,"MonFichier.txt")), _ftpRep(strcpy(_ftpRep, "/")), FTPclient() {}
 
 
     /**
