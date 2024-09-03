@@ -1,6 +1,6 @@
 # FTP_lireftpFile
 
-Connect to a NTP server, here is how:
+Async connect to FTP, read data from a file, here is how:
 
 ```cpp
 #include <FTP_lireftpFile.h>
