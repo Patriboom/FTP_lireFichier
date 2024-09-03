@@ -1,5 +1,7 @@
-LecteurFTP 1.1.0 - 2024.08.31
+LecteurFTP 1.1.1 - 2024-09-01
+* Swith from FTPclient_generic to FTPduino as main FTP class
 
-* Begining
+LecteurFTP 1.1.0 - 2024.08.26
+* Begining with FTPclient_generic
 
 
