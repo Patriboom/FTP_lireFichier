@@ -114,11 +114,11 @@ void LecteurFTP::setServerPswd(char* ServerPassword) {
 }
 
 void LecteurFTP::setDirectory(char* ServerDir) {
-    _ftpRep = ServerDir;
+    strlcpy(_ftpRep, ServerDir, 55);
 }
 
 void LecteurFTP::setFileName(char* FileName) {
-    _ftpFile = FileName;
+    strlcpy(_ftpFile, FileName, sizeof _ftpFile);
 }
 
 void LecteurFTP::setFrequency(unsigned int ServFreq) {

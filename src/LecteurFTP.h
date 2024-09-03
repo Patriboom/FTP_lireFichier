@@ -7,7 +7,7 @@
 #define FTP_FREQUENCE 55000
 #define FTP_DEFAULT_PORT 21
 #define FTP_DEFAULT_FILE "MonFichier.txt"
-#define FTP_DEFAULT_REP "/"
+#define FTP_DEFAULT_REP "/Repertoire/"
 
 class LecteurFTP {
 	private:
@@ -17,13 +17,8 @@ class LecteurFTP {
 	   char* _ftpSrv;
 	   char* _ftpUsr;
 	   char* _ftpPsw;
-	   char* _ftpFile = strcpy(_ftpFile, FTP_DEFAULT_FILE);
-	   char* _ftpRep = strcpy(_ftpRep,FTP_DEFAULT_REP);
-//	   char* _ftpFile[30] = ['M','o','n','F','i','c','h','i','e','r','.','t','x','t','"'];
-//	   constexpr static const char* _ftpFile = "MonFichier.txt";
-//	   constexpr static const char* _ftpRep = "/";
-//		char* _ftpFile = FTP_DEFAULT_FILE;
-//		char* _ftpRep = FTP_DEFAULT_REP;
+	   char _ftpFile[35];
+	   char _ftpRep[55];
 	   unsigned int  _ftpPort = FTP_DEFAULT_PORT;
 	   long          _timeOffset     = 0;
 	
@@ -37,8 +32,12 @@ class LecteurFTP {
 	   bool	status = true;
 	
 	public:
-//		LecteurFTP(char* _ftpSrv, char* _ftpUsr, char* _ftpPsw, char* _ftpFile) : FTPclient() {}
-		LecteurFTP(char* _ftpSrv, char* _ftpUsr, char* _ftpPsw, char* _ftpFile) : _ftpSrv(_ftpSrv), _ftpUsr(_ftpUsr), _ftpPsw(_ftpPsw), _ftpFile(strcpy(_ftpFile,"MonFichier.txt")), _ftpRep(strcpy(_ftpRep, "/")), FTPclient() {}
+		LecteurFTP(char* _ftpSrv, char* _ftpUsr, char* _ftpPsw, char* _ftpFile) 
+			: _ftpSrv(_ftpSrv), _ftpUsr(_ftpUsr), _ftpPsw(_ftpPsw), FTPclient()
+			{
+				strlcpy(_ftpFile, FTP_DEFAULT_FILE, sizeof _ftpFile);
+				strlcpy(_ftpRep,  FTP_DEFAULT_REP,  sizeof _ftpRep );
+			}
 
 
     /**
