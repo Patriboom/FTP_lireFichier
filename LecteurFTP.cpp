@@ -26,7 +26,7 @@ bool LecteurFTP::forceUpdate() {
     Serial.println("Forcing update of your FTP`s file into the RAM");
   #endif
   if(getStatus() == false) { Serial.println("Il n`y a pas de connexion Wifi active.");  return false; }
-  _contenuLU = getText();
+  strcpy(_contenuLU, getText());
   _lastUpdate = millis();
   return true;
 }
@@ -40,7 +40,7 @@ bool LecteurFTP::update() {
 	return true;
 }
 
-String LecteurFTP::getText() {
+char* LecteurFTP::getText() {
 	if(getStatus() == false) { 
 		if (Connexion() == true) {
 			FTPclient.connect(_ftpSrv, _ftpPort);
@@ -52,10 +52,9 @@ String LecteurFTP::getText() {
 
 			Serial.print  ("Voici la valeur lue : ");
 			Serial.write(fileBuffer, fileSize);
-			_contenuLU = itoa(fileBuffer, fileSize	, 10);
-			//fileSize = FTPclient.GetLastModifiedTime(_ftpFile, fileSize);
+			_contenuLU = (char *) (intptr_t) fileBuffer;
 		} else {
-			return "";
+			strcpy(_contenuLU,"");
 		}
 	}
 	return _contenuLU;
@@ -85,7 +84,7 @@ long LecteurFTP::getTime() {
 }
 
 int LecteurFTP::getSize() {
-	return _contenuLU.length();
+	return sizeof(_contenuLU);
 }
 
 
@@ -127,6 +126,6 @@ void LecteurFTP::setFrequency(unsigned int ServFreq) {
 }
 
 void LecteurFTP::setPort(int ServPort) {
-   FTPclient.disconnect();
+//   FTPclient.disconnect();
     _ftpPort = ServPort;
 }

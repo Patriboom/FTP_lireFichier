@@ -6,33 +6,39 @@
 #define DEBUG_LecteurFTP false
 #define FTP_FREQUENCE 55000
 #define FTP_DEFAULT_PORT 21
+#define FTP_DEFAULT_FILE "MonFichier.txt"
+#define FTP_DEFAULT_REP "/"
 
 class LecteurFTP {
 	private:
 	   FTPduino FTPclient;
-	   bool          _udpSetup       = true;
-	
+
+	   bool  _udpSetup = true;
 	   char* _ftpSrv;
 	   char* _ftpUsr;
 	   char* _ftpPsw;
-//	   char* _ftpFile;
-//	   char* _ftpRep;
-	   constexpr static const char* _ftpFile = "MonFichier.txt";
-	   constexpr static const char* _ftpRep = "/";
+	   char* _ftpFile = strcpy(_ftpFile, FTP_DEFAULT_FILE);
+	   char* _ftpRep = strcpy(_ftpRep,FTP_DEFAULT_REP);
+//	   char* _ftpFile[30] = ['M','o','n','F','i','c','h','i','e','r','.','t','x','t','"'];
+//	   constexpr static const char* _ftpFile = "MonFichier.txt";
+//	   constexpr static const char* _ftpRep = "/";
+//		char* _ftpFile = FTP_DEFAULT_FILE;
+//		char* _ftpRep = FTP_DEFAULT_REP;
 	   unsigned int  _ftpPort = FTP_DEFAULT_PORT;
 	   long          _timeOffset     = 0;
 	
 	   unsigned long _ftpFreq = FTP_FREQUENCE;  // In ms
 	   unsigned long _lastUpdate     = 0;      // In ms
-	   String		   _contenuLU;
 	
 	   void	contenuLU();
+	   char*_contenuLU;
 	   char*	fileSize;
 	   long	fileTime;
 	   bool	status = true;
 	
 	public:
 		LecteurFTP(char* _ftpSrv, char* _ftpUsr, char* _ftpPsw, char* _ftpFile) : FTPclient() {}
+//		LecteurFTP(char* _ftpSrv, char* _ftpUsr, char* _ftpPsw, char* _ftpFile) : _ftpSrv(_ftpSrv), _ftpUsr(_ftpUsr), _ftpPsw(_ftpPsw), _ftpFile("MonFichier.txt"), _ftpRep("/"), FTPclient() {}
 
 
     /**
@@ -72,7 +78,7 @@ class LecteurFTP {
     /**
      * Définition des valeurs retournées par l'objet
      */
-    String getText();
+    char* getText();
     long getTime();
     int getSize();
 
