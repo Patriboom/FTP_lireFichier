@@ -1,9 +1,9 @@
-# FTP_lireftpFile
+# LecteurFTP
 
 Async connect to FTP, read data from a file, here is how:
 
 ```cpp
-#include <FTP_lireftpFile.h>
+#include <LecteurFTP.h>
 // change next line to use with another board/shield
 #include <ESP8266WiFi.h>
 
@@ -16,14 +16,14 @@ const char *ftpPsw	 = "MyFTPpassword";		//Password for the FTP user
 const char *ftpFile	 = "FileName.txt";		//File to read (download into RAM)
 char *contentFile	 = "";				//Please keep this empty, that will carry the file's content
 
-FTP_lireftpFile lectureFTP(ftpSrv, ftpUsr, ftpPsw, ftpFile);
+LecteurFTP lectureFTP(ftpSrv, ftpUsr, ftpPsw, ftpFile);
 
 // You can specify the file's directory (last char must be /  )
 // You can specify the update interval (in milliseconds) default value is 55000
 // You can specify the FTP port, default value is 22
-// FTP_lireftpFile lectureFTP(ftpSrv, ftpUsr, ftpPsw, ftpFile, "myRep/");
-// FTP_lireftpFile lectureFTP(ftpSrv, ftpUsr, ftpPsw, ftpFile, "myRep/", 75000);
-// FTP_lireftpFile lectureFTP(ftpSrv, ftpUsr, ftpPsw, ftpFile, "myRep/", 75000, 473);
+// LecteurFTP lectureFTP(ftpSrv, ftpUsr, ftpPsw, ftpFile, "myRep/");
+// LecteurFTP lectureFTP(ftpSrv, ftpUsr, ftpPsw, ftpFile, "myRep/", 75000);
+// LecteurFTP lectureFTP(ftpSrv, ftpUsr, ftpPsw, ftpFile, "myRep/", 75000, 473);
 
 
 void setup(){
