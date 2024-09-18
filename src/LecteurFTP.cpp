@@ -41,20 +41,21 @@ bool LecteurFTP::update() {
 }
 
 char* LecteurFTP::getText() {
-	if(getStatus() == false) { 
-		if (Connexion() == true) {
-			FTPclient.connect(_ftpSrv, _ftpPort);
-			FTPclient.authenticate(_ftpUsr, _ftpPsw);
-      	size_t fileSize = FTPclient.getFileSize(_ftpFile);
-	      uint8_t fileBuffer[fileSize];
-   	   FTPclient.downloadFile(_ftpFile, fileBuffer, fileSize);
-	      FTPclient.disconnect();
+	strcpy(_contenuLU,"");
+	if (Connexion() == true) {
+		FTPclient.connect(_ftpSrv, _ftpPort);
+		FTPclient.authenticate(_ftpUsr, _ftpPsw);
+   	size_t fileSize = FTPclient.getFileSize(_ftpFile);
+      uint8_t fileBuffer[fileSize];
+	   FTPclient.downloadFile(_ftpFile, fileBuffer, fileSize);
+      FTPclient.disconnect();
 
-			Serial.print  ("Voici la valeur lue : ");
-			Serial.write(fileBuffer, fileSize);
-			_contenuLU = (char *) (intptr_t) fileBuffer;
-		} else {
-			strcpy(_contenuLU,"");
+		Serial.print  ("Voici la valeur lue : ");
+		Serial.write(fileBuffer, fileSize);
+		char* ceci = (char *) (intptr_t) fileBuffer;
+		_rendu = 0;
+		for (int THISx=0; THISx<fileSize; THISx++) {
+			if (isAscii(ceci[THISx])) { _contenuLU[_rendu++] = ceci[THISx]; }
 		}
 	}
 	return _contenuLU;
@@ -86,7 +87,6 @@ long LecteurFTP::getTime() {
 int LecteurFTP::getSize() {
 	return sizeof(_contenuLU);
 }
-
 
 void LecteurFTP::end() {
   FTPclient.disconnect();

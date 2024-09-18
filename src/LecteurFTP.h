@@ -21,6 +21,8 @@ class LecteurFTP {
 	   char _ftpRep[55];
 	   unsigned int  _ftpPort = FTP_DEFAULT_PORT;
 	   long          _timeOffset     = 0;
+	   int _rendu = 0;
+	   int THISx = 0;
 	
 	   unsigned long _ftpFreq = FTP_FREQUENCE;  // In ms
 	   unsigned long _lastUpdate     = 0;      // In ms
