@@ -41,21 +41,19 @@ bool LecteurFTP::update() {
 }
 
 char* LecteurFTP::getText() {
-	strcpy(_contenuLU,"");
+		_contenuLU = "";
 	if (Connexion() == true) {
-		FTPclient.connect(_ftpSrv, _ftpPort);
-		FTPclient.authenticate(_ftpUsr, _ftpPsw);
-   	size_t fileSize = FTPclient.getFileSize(_ftpFile);
-      uint8_t fileBuffer[fileSize];
-	   FTPclient.downloadFile(_ftpFile, fileBuffer, fileSize);
+   	size_t _ftpFileSize = FTPclient.getFileSize(_ftpFileName);
+      uint8_t fileBuffer[_ftpFileSize];
+	   FTPclient.downloadFile(_ftpFileName, fileBuffer, _ftpFileSize);
       FTPclient.disconnect();
 
 		Serial.print  ("Voici la valeur lue : ");
-		Serial.write(fileBuffer, fileSize);
+		Serial.write(fileBuffer, _ftpFileSize);
 		char* ceci = (char *) (intptr_t) fileBuffer;
-		_rendu = 0;
-		for (int THISx=0; THISx<fileSize; THISx++) {
-			if (isAscii(ceci[THISx])) { _contenuLU[_rendu++] = ceci[THISx]; }
+		int rendu = 0;
+		for (int THISx=0; THISx<_ftpFileSize; THISx++) {
+			if (isAscii(ceci[THISx])) { _contenuLU[rendu++] = ceci[THISx]; }
 		}
 	}
 	return _contenuLU;
@@ -63,16 +61,18 @@ char* LecteurFTP::getText() {
 
 bool LecteurFTP::Connexion() {
 	int combien = 0;
-	WiFi.begin();
-	while (WiFi.status() != WL_CONNECTED && ++combien <= 40) {
-		delay(500);
-		Serial.print(".");
+	if (WiFi.status() != WL_CONNECTED) {
+		WiFi.begin();
+		while (WiFi.status() != WL_CONNECTED && ++combien <= 40) {
+			delay(500);
+			Serial.print(".");
+		}
 	}
 	if (combien > 40) { 
 		Serial.println(" échouée"); 
 		return false; 
 	} else { 
-		Serial.println( " réussie! "); 
+		Serial.println( " Connexion wifi rétablie avec succès! "); 
 		FTPclient.connect(_ftpSrv, _ftpPort);
 		FTPclient.authenticate(_ftpUsr, _ftpPsw);
 		FTPclient.setWorkDirectory(_ftpRep);
@@ -118,7 +118,7 @@ void LecteurFTP::setDirectory(char* ServerDir) {
 }
 
 void LecteurFTP::setFileName(char* FileName) {
-    strlcpy(_ftpFile, FileName, sizeof _ftpFile);
+    strlcpy(_ftpFileName, FileName, sizeof _ftpFileName);
 }
 
 void LecteurFTP::setFrequency(unsigned int ServFreq) {
