@@ -7,7 +7,8 @@
 #define FTP_FREQUENCE 55000
 #define FTP_DEFAULT_PORT 21
 #define FTP_DEFAULT_FILE "dehorsPond_temp.txt"
-#define FTP_DEFAULT_REP "/Repertoire/"
+#define FTP_DEFAULT_REP "/"
+#define CONTENU_LU "";
 
 class LecteurFTP {
 	private:
@@ -18,7 +19,7 @@ class LecteurFTP {
 	   char* _ftpUsr;
 	   char* _ftpPsw;
 	   char _ftpFileName[35] = FTP_DEFAULT_FILE;
-	   char _ftpRep[55];
+	   char _ftpRep[55] = FTP_DEFAULT_REP;
 	   unsigned int  _ftpPort = FTP_DEFAULT_PORT;
 	   long          _timeOffset     = 0;
 	   int THISx = 0;
@@ -27,7 +28,7 @@ class LecteurFTP {
 	   unsigned long _lastUpdate     = 0;      // In ms
 	
 	   void	contenuLU();
-	   char*_contenuLU;
+	   char _contenuLU[10] = CONTENU_LU;
 	   char*	_ftpFileSize;
 	   long	fileTime;
 	   bool	status = true;

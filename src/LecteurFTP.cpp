@@ -41,7 +41,7 @@ bool LecteurFTP::update() {
 }
 
 char* LecteurFTP::getText() {
-		_contenuLU = "";
+	_contenuLU[0]='\0';
 	if (Connexion() == true) {
    	size_t _ftpFileSize = FTPclient.getFileSize(_ftpFileName);
       uint8_t fileBuffer[_ftpFileSize];
